@@ -33,7 +33,7 @@ void init_std(void)
 }
 
 void _fini(void);
-int64_t _syscall(int, void *);
+[[noreturn]] int64_t _syscall(int, void *);
 
 /**
  * @brief Exits the program with the specified status code.

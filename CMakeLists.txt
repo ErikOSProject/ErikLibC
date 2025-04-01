@@ -14,12 +14,28 @@ message(FATAL_ERROR "Please specify a compatible toolchain file.
 For example: \"cmake -DCMAKE_TOOLCHAIN_FILE=../x64.cmake ..\"")
 endif()
 
-add_library(c
-    src/init.c
+add_library(c_core
     src/malloc.c
     src/string.c
+)
+
+add_library(c
+    src/init.c
     ${ARCH_SOURCES}
 )
+
+target_compile_options(c_core PRIVATE 
+    -Wall -Wextra -pedantic -Werror
+    -ffreestanding
+    -fshort-wchar
+    -mno-red-zone
+    -Wno-unused-variable
+    -Wno-unused-command-line-argument
+    -Wno-c11-extensions
+    -Wno-c99-extensions
+    -Wno-c2x-extensions
+    -Wno-language-extension-token
+    -Wno-writable-strings)
 
 target_compile_options(c PRIVATE 
     -Wall -Wextra -pedantic -Werror
@@ -34,8 +50,14 @@ target_compile_options(c PRIVATE
     -Wno-language-extension-token
     -Wno-writable-strings)
 
+target_link_options(c_core PRIVATE
+    -nostdlib)
+
 target_link_options(c PRIVATE
     -nostdlib)
+
+target_link_libraries(c PRIVATE
+    c_core erikbus)
 
 target_include_directories(c PUBLIC 
     include)
