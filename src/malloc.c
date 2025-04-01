@@ -24,7 +24,7 @@ static uintptr_t heap_end;
 static heap_block *first_block;
 static heap_block *last_block;
 
-static char heap_buffer[0x100];
+static char heap_buffer[0x10000];
 
 /**
  * @brief Splits a heap block into two blocks.
