@@ -15,6 +15,7 @@ For example: \"cmake -DCMAKE_TOOLCHAIN_FILE=../x64.cmake ..\"")
 endif()
 
 add_library(c_core
+    src/errno.c
     src/malloc.c
     src/string.c
 )
@@ -58,6 +59,9 @@ target_link_options(c PRIVATE
 
 target_link_libraries(c PRIVATE
     c_core erikbus)
+
+target_include_directories(c_core PUBLIC 
+    include)
 
 target_include_directories(c PUBLIC 
     include)
