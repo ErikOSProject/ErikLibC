@@ -65,3 +65,5 @@ target_include_directories(c_core PUBLIC
 
 target_include_directories(c PUBLIC 
     include)
+
+install(TARGETS c_core c)
