@@ -41,7 +41,7 @@ typedef struct {
 typedef unsigned long size_t;
 
 #ifndef __cplusplus
-typedef unsigned short wchar_t;
+typedef short wchar_t;
 #endif
 
 void exit(int status);
